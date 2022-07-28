@@ -393,9 +393,8 @@ export class SkkServer implements Dictionary {
     }
     return result;
   }
-  async getCandidates(_prefix: string): Promise<CompletionData> {
-    // TODO: add support for ddc.vim
-    return await Promise.resolve([["", [""]]]);
+  async getCandidates(prefix: string): Promise<CompletionData> {
+    return [[prefix, await this.getCandidate("okurinasi", prefix)]];
   }
   close() {
     this.#conn?.write(encode("0", this.requestEncoding));
